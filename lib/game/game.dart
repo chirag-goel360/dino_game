@@ -1,3 +1,4 @@
+import 'package:dino_run/game/enemy.dart';
 import 'package:flame/components/parallax_component.dart';
 import 'package:flame/game/base_game.dart';
 import 'package:flame/gestures.dart';
@@ -24,6 +25,8 @@ class DinoGame extends BaseGame with TapDetector{
     add(_parallaxComponent);
     _dino = Dino();
     add(_dino);
+    var enemy = Enemy(EnemyType.BlueBird);
+    add(enemy);
   }
 
   @override

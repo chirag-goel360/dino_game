@@ -3,11 +3,7 @@ import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/animation.dart' as animate;
-
-const double groundHeight = 32;
-const double dinoTopBottomSpacing = 10;
-const int numberOfTilesAlongWidth = 10;
-const double GRAVITY = 1000;
+import 'constants.dart';
 
 class Dino extends AnimationComponent{
   animate.Animation _runAnimation;

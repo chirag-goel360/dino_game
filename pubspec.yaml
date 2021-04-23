@@ -50,6 +50,26 @@ flutter:
     - assets/images/
     - assets/audio/
     - assets/images/parallax/
+    - assets/images/AngryPig/
+    - assets/images/Bat/
+    - assets/images/Bee/
+    - assets/images/BlueBird/
+    - assets/images/Bunny/
+    - assets/images/Chameleon/
+    - assets/images/Chicken/
+    - assets/images/Duck/
+    - assets/images/FatBird/
+    - assets/images/Ghost/
+    - assets/images/Mushroom/
+    - assets/images/Plant/
+    - assets/images/Radish/
+    - assets/images/Rino/
+    - assets/images/Rocks/
+    - assets/images/Skull/
+    - assets/images/Slime/
+    - assets/images/Snail/
+    - assets/images/Trunk/
+    - assets/images/Turtle/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
