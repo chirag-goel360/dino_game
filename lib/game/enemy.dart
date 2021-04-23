@@ -4,7 +4,7 @@ import 'package:flame/spritesheet.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-enum EnemyType{
+enum EnemyType {
   AngryPig,
   Bat,
   Bee,
@@ -27,7 +27,7 @@ enum EnemyType{
   Turtle
 }
 
-class EnemyData{
+class EnemyData {
   final String imageName;
   final int textureWidth;
   final int textureHeight;
@@ -43,7 +43,7 @@ class EnemyData{
   });
 }
 
-class Enemy extends AnimationComponent{
+class Enemy extends AnimationComponent {
   double speed = 200;
   Size size;
   int textureWidth;
@@ -192,7 +192,7 @@ class Enemy extends AnimationComponent{
     ),
   };
 
-  Enemy(EnemyType enemyType) : super.empty(){
+  Enemy(EnemyType enemyType) : super.empty() {
     final enemyData = _enemyDetails[enemyType];
     final spriteSheet = SpriteSheet(
       imageName: enemyData.imageName, 
@@ -207,7 +207,7 @@ class Enemy extends AnimationComponent{
   }
 
   @override
-  void resize(Size size){
+  void resize(Size size) {
     super.resize(size);
     debugPrint(size.toString());
     double scaleFactor = (size.width/numberOfTilesAlongWidth)/textureWidth;
@@ -219,11 +219,13 @@ class Enemy extends AnimationComponent{
   }
 
   @override
-  void update(double t){
+  void update(double t) {
     super.update(t);
     this.x -= speed*t;
-    if(this.x < (-this.width)){
-      this.x = size.width + this.width;
-    }
+  }
+
+  @override
+  bool destroy() {
+    return (this.x < (-this.width));
   }
 }

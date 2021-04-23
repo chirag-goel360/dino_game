@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flame/animation.dart' as animate;
 import 'constants.dart';
 
-class Dino extends AnimationComponent{
+class Dino extends AnimationComponent {
   animate.Animation _runAnimation;
   animate.Animation _hitAnimation;
   double speedY = 0.0;
   double yMax = 0.0;
 
-  Dino() : super.empty(){
+  Dino() : super.empty() {
     // 0-3 = idle
     // 4-10 = run
     // 11-13 = kick
@@ -47,26 +47,26 @@ class Dino extends AnimationComponent{
     this.speedY += GRAVITY*t;
     // d=s+v*t
     this.y += this.speedY*t;
-    if(isOnGround()){
+    if(isOnGround()) {
       this.y = this.yMax;
       this.speedY = 0.0;
     }
   }
 
-  bool isOnGround(){
+  bool isOnGround() {
     return (this.y >= this.yMax);
   }
 
-  void run(){
+  void run() {
     this.animation = _runAnimation;
   }
 
-  void hit(){
+  void hit() {
     this.animation = _hitAnimation;
   }
 
-  void jump(){
-    if(isOnGround()){
+  void jump() {
+    if(isOnGround()) {
       this.speedY = -600;
     }
   }
