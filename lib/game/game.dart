@@ -57,5 +57,10 @@ class DinoGame extends BaseGame with TapDetector {
     super.update(t);
     score += (60*t).toInt();
     _scoreText.text = score.toString();
+    components.whereType<Enemy>().forEach((enemy) {
+      if(_dino.distance(enemy)<20) {
+        _dino.hit();
+      }
+    });
   }
 }
