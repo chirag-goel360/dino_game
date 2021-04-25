@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dino Run',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Audiowide',
         primarySwatch: Colors.blue,

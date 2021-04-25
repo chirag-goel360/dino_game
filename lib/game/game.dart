@@ -69,18 +69,59 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
         _dino.hit();
       }
     });
+    if(_dino.life.value <= 0) {
+      gameOver();
+    }
+  }
+
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch(state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+        this.pauseGame();
+        break;
+      case AppLifecycleState.paused:
+        this.pauseGame();
+        break;
+      case AppLifecycleState.detached:
+        this.pauseGame();
+        break;
+    }
   }
 
   Widget _buildhd() {
-    return IconButton(
-      icon: Icon(
-        Icons.pause,
-        color: Colors.white,
-        size: 30,
-      ),
-      onPressed: () {
-        pauseGame();
-      },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.pause,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            pauseGame();
+          },
+        ),
+        ValueListenableBuilder(
+          valueListenable: _dino.life,
+          builder: (BuildContext context,value, Widget child) {
+            final list = List<Widget>();
+            for(int i=0;i<5;i++) {
+              list.add(
+                Icon((i<value) ? Icons.favorite : Icons.favorite_border,
+                color: Colors.red,
+                ),
+              );
+            }
+            return Row(
+              children: list,
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -132,5 +173,69 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   void resumeGame() {
     removeWidgetOverlay('PauseMenu');
     resumeEngine();
+  }
+
+  Widget _getGameOverMenu() {
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: Colors.black.withOpacity(0.5),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 100,
+            vertical: 50,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Game Over',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'Your score was $score',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.replay,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  reset();
+                  removeWidgetOverlay('GameOverMenu');
+                  resumeEngine();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void gameOver() {
+    pauseEngine();
+    addWidgetOverlay('GameOverMenu', _getGameOverMenu());
+  }
+
+  void reset() {
+    this.score = 0;
+    _dino.life.value = 5;
+    _dino.run();
+    _enemyManager.reset();
+    components.whereType<Enemy>().forEach((enemy) {
+      this.markToRemove(enemy);
+    });
   }
 }

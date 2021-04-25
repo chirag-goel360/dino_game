@@ -14,6 +14,7 @@ class Dino extends AnimationComponent {
   double yMax = 0.0;
   Timer _timer; 
   bool _isHit;
+  ValueNotifier<int> life;
 
   Dino() : super.empty() {
     // 0-3 = idle
@@ -37,6 +38,7 @@ class Dino extends AnimationComponent {
     });
     _isHit = false;
     this.anchor = Anchor.center;
+    life = ValueNotifier(5);
   }
 
   @override
@@ -74,9 +76,10 @@ class Dino extends AnimationComponent {
 
   void hit() {
     if(!_isHit) {
-      this.animation = _hitAnimation;
-      _timer.start();
       _isHit = true;
+      this.animation = _hitAnimation;
+      life.value -= 1;
+      _timer.start();
     }
   }
 
