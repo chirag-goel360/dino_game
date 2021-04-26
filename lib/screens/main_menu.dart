@@ -60,7 +60,7 @@ class MainMenu extends StatelessWidget {
             ),
           ),
         ),
-      ), 
+      ),
     );
   }
 }

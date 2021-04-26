@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class GamePlay extends StatelessWidget {
   final DinoGame _dinoGame = DinoGame();
-
   GamePlay({Key key}) : super(key: key);
 
   @override

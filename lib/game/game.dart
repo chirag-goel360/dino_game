@@ -1,5 +1,8 @@
 import 'package:dino_run/game/enemy.dart';
 import 'package:dino_run/game/enemy_manager.dart';
+import 'package:dino_run/widgets/game_over_menu.dart';
+import 'package:dino_run/widgets/hd.dart';
+import 'package:dino_run/widgets/pause_menu.dart';
 import 'package:flame/components/parallax_component.dart';
 import 'package:flame/components/text_component.dart';
 import 'package:flame/game.dart';
@@ -21,12 +24,25 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   DinoGame() {
     _parallaxComponent = ParallaxComponent(
       [
-        ParallaxImage('parallax/plx-1.png'),
-        ParallaxImage('parallax/plx-2.png'),
-        ParallaxImage('parallax/plx-3.png'),
-        ParallaxImage('parallax/plx-4.png'),
-        ParallaxImage('parallax/plx-5.png'),
-        ParallaxImage('parallax/plx-6.png',fill: LayerFill.none),
+        ParallaxImage(
+          'parallax/plx-1.png',
+        ),
+        ParallaxImage(
+          'parallax/plx-2.png',
+        ),
+        ParallaxImage(
+          'parallax/plx-3.png',
+        ),
+        ParallaxImage(
+          'parallax/plx-4.png',
+        ),
+        ParallaxImage(
+          'parallax/plx-5.png',
+        ),
+        ParallaxImage(
+          'parallax/plx-6.png',
+          fill: LayerFill.none,
+        ),
       ],
       baseSpeed: Offset(100,0),
       layerDelta: Offset(20,0),
@@ -37,19 +53,28 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     _enemyManager = EnemyManager();
     add(_enemyManager);
     score = 0;
-    _scoreText = TextComponent(score.toString(),config: TextConfig(
-      fontFamily: 'Audiowide',
-      color: Colors.white,
-    ));
+    _scoreText = TextComponent(
+      score.toString(),
+      config: TextConfig(
+        fontFamily: 'Audiowide',
+        color: Colors.white,
+      ),
+    );
     add(_scoreText);
-    addWidgetOverlay('hd',_buildhd());
+    addWidgetOverlay(
+      'hd',
+      HD(
+        onPausePressed: pauseGame, 
+        life: _dino.life,
+      ),
+    );
   }
 
   @override
   void resize(Size size) {
     super.resize(size);
     _scoreText.setByPosition(
-      Position(((size.width/2)-(_scoreText.width/2)), 0),
+      Position(((size.width / 2) - (_scoreText.width / 2)), 0),
     );
   }
 
@@ -62,10 +87,10 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   @override
   void update(double t) {
     super.update(t);
-    score += (60*t).toInt();
+    score += (60 * t).toInt();
     _scoreText.text = score.toString();
     components.whereType<Enemy>().forEach((enemy) {
-      if(_dino.distance(enemy)<30) {
+      if(_dino.distance(enemy) < 30) {
         _dino.hit();
       }
     });
@@ -91,142 +116,32 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     }
   }
 
-  Widget _buildhd() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: Icon(
-            Icons.pause,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () {
-            pauseGame();
-          },
-        ),
-        ValueListenableBuilder(
-          valueListenable: _dino.life,
-          builder: (BuildContext context,value, Widget child) {
-            final list = List<Widget>();
-            for(int i=0;i<5;i++) {
-              list.add(
-                Icon((i<value) ? Icons.favorite : Icons.favorite_border,
-                color: Colors.red,
-                ),
-              );
-            }
-            return Row(
-              children: list,
-            );
-          },
-        ),
-      ],
-    );
-  }
-
   void pauseGame() {
     pauseEngine();
-    addWidgetOverlay('PauseMenu', _buildPauseMenu());
-  }
-
-  Widget _buildPauseMenu() {
-    return Center(
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        color: Colors.black.withOpacity(0.5),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 100,
-            vertical: 50,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Paused',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.play_arrow,
-                  color: Colors.white,
-                  size: 30,
-                ), 
-                onPressed: () {
-                  resumeGame();
-                }
-              ),
-            ],
-          ),
-        ),
+    addWidgetOverlay(
+      'PauseMenu', 
+      PauseMenu(
+        onResumePressed: resumeGame,
       ),
     );
   }
 
   void resumeGame() {
-    removeWidgetOverlay('PauseMenu');
-    resumeEngine();
-  }
-
-  Widget _getGameOverMenu() {
-    return Center(
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        color: Colors.black.withOpacity(0.5),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 100,
-            vertical: 50,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Game Over',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                'Your score was $score',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.replay,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {
-                  reset();
-                  removeWidgetOverlay('GameOverMenu');
-                  resumeEngine();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+    removeWidgetOverlay(
+      'PauseMenu',
     );
+    resumeEngine();
   }
 
   void gameOver() {
     pauseEngine();
-    addWidgetOverlay('GameOverMenu', _getGameOverMenu());
+    addWidgetOverlay(
+      'GameOverMenu', 
+      GameOverMenu(
+        score: score, 
+        onRestartPressed: reset,
+      ),
+    );
   }
 
   void reset() {
@@ -237,5 +152,9 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     components.whereType<Enemy>().forEach((enemy) {
       this.markToRemove(enemy);
     });
+    removeWidgetOverlay(
+      'GameOverMenu',
+    );
+    resumeEngine();
   }
 }

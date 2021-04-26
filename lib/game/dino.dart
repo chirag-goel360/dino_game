@@ -12,7 +12,7 @@ class Dino extends AnimationComponent {
   animate.Animation _hitAnimation;
   double speedY = 0.0;
   double yMax = 0.0;
-  Timer _timer; 
+  Timer _timer;
   bool _isHit;
   ValueNotifier<int> life;
 
@@ -23,19 +23,31 @@ class Dino extends AnimationComponent {
     // 14-16 = hit
     // 17-23 = sprint
     final spriteSheet = SpriteSheet(
-      imageName: 'DinoSprites - tard.png', 
-      textureWidth: 24, 
-      textureHeight: 24, 
-      columns: 24, 
+      imageName: 'DinoSprites - tard.png',
+      textureWidth: 24,
+      textureHeight: 24,
+      columns: 24,
       rows: 1,
     );
     //final idleAnimation = spriteSheet.createAnimation(0,from: 0,to: 3,stepTime: 0.1);
-    _runAnimation = spriteSheet.createAnimation(0,from: 4,to: 10,stepTime: 0.1);
-    _hitAnimation = spriteSheet.createAnimation(0,from: 14,to: 16,stepTime: 0.1);
+    _runAnimation = spriteSheet.createAnimation(
+      0,
+      from: 4,
+      to: 10,
+      stepTime: 0.1,
+    );
+    _hitAnimation = spriteSheet.createAnimation(
+      0,
+      from: 14,
+      to: 16,
+      stepTime: 0.1,
+    );
     this.animation = _runAnimation;
-    _timer = Timer(1, callback: () {
-      run();
-    });
+    _timer = Timer(
+      1, callback: () {
+        run();
+      },
+    );
     _isHit = false;
     this.anchor = Anchor.center;
     life = ValueNotifier(5);
@@ -45,19 +57,19 @@ class Dino extends AnimationComponent {
   void resize(Size size) {
     super.resize(size);
     debugPrint(size.toString());
-    this.height = this.width = size.width/numberOfTilesAlongWidth;
+    this.height = this.width = size.width / numberOfTilesAlongWidth;
     this.x = this.width;
-    this.y = size.height - groundHeight - (this.height/2) + dinoTopBottomSpacing;
+    this.y = size.height - groundHeight - (this.height / 2) + dinoTopBottomSpacing;
     this.yMax = this.y;
   }
 
   @override
   void update(double t) {
     super.update(t);
-    // v=u+at
-    this.speedY += GRAVITY*t;
-    // d=s+v*t
-    this.y += this.speedY*t;
+    // v = u + at
+    this.speedY += GRAVITY * t;
+    // d = s + v * t
+    this.y += this.speedY * t;
     if(isOnGround()) {
       this.y = this.yMax;
       this.speedY = 0.0;

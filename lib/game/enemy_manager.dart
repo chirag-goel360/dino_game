@@ -14,13 +14,19 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
   EnemyManager() {
     _random = Random();
     _spawnLevel = 0;
-    _timer = Timer(4, repeat: true,callback: () {
-      spawnRandomEnemy();
-    });
+    _timer = Timer(
+      4, 
+      repeat: true,
+      callback: () {
+        spawnRandomEnemy();
+      },
+    );
   }
 
   void spawnRandomEnemy() {
-    final randomNumber = _random.nextInt(EnemyType.values.length);
+    final randomNumber = _random.nextInt(
+      EnemyType.values.length,
+    );
     final randomEnemyType = EnemyType.values.elementAt(randomNumber);
     final newEnemy = Enemy(randomEnemyType);
     gameRef.addLater(newEnemy);
@@ -40,23 +46,31 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
   @override
   void update(double t) {
     _timer.update(t);
-    var newSpawnLevel = gameRef.score~/500;
+    var newSpawnLevel = gameRef.score ~/ 500;
     if(_spawnLevel < newSpawnLevel) {
       _spawnLevel = newSpawnLevel;
-      var newWaitTime = (4/(1+(0.1*_spawnLevel)));
+      var newWaitTime = (4 / (1 + (0.1 * _spawnLevel)));
       debugPrint(newWaitTime.toString());
       _timer.stop();
-      _timer = Timer(newWaitTime, repeat: true,callback: () {
-        spawnRandomEnemy();
-      });
+      _timer = Timer(
+        newWaitTime, 
+        repeat: true,
+        callback: () {
+          spawnRandomEnemy();
+        },
+      );
       _timer.start();
     }
   }
 
   void reset() {
     _spawnLevel = 0;
-    _timer = Timer(4,repeat: true,callback: () {
-      spawnRandomEnemy();
-    });
+    _timer = Timer(
+      4,
+      repeat: true,
+      callback: () {
+        spawnRandomEnemy();
+      },
+    );
   }
 }

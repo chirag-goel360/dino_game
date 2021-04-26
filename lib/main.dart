@@ -1,4 +1,3 @@
-import 'package:dino_run/game/game.dart';
 import 'package:dino_run/screens/main_menu.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
