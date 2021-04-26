@@ -1,4 +1,5 @@
 import 'package:dino_run/game/game.dart';
+import 'package:dino_run/screens/main_menu.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
@@ -22,33 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(
-        title:'Dino Run',
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}):super(key:key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  DinoGame game;
-
-  @override
-  void initState() {
-    super.initState();
-    game = DinoGame();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: game.widget,
+      home: MainMenu(),
     );
   }
 }
