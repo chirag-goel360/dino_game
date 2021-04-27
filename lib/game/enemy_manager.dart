@@ -72,5 +72,6 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
         spawnRandomEnemy();
       },
     );
+    _timer.start();
   }
 }
