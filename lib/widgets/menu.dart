@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
   final Function onSettingsPressed;
-  const Menu({Key key, @required this.onSettingsPressed}) : assert(onSettingsPressed!=null),super(key: key);
+  const Menu({Key key, @required this.onSettingsPressed}) : assert(onSettingsPressed!=null), super(key: key);
 
   @override
   Widget build(BuildContext context) {

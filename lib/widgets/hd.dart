@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HD extends StatelessWidget {
   final Function onPausePressed;
   final ValueNotifier<int> life;
-  const HD({Key key, @required this.onPausePressed, @required this.life}) : assert(onPausePressed!=null), assert(life!=null),super(key: key);
+  const HD({Key key, @required this.onPausePressed, @required this.life}) : assert(onPausePressed!=null), assert(life!=null), super(key: key);
 
   @override
   Widget build(BuildContext context) {

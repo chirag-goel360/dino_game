@@ -1,3 +1,4 @@
+import 'package:dino_run/game/audio_manager.dart';
 import 'package:dino_run/game/enemy.dart';
 import 'package:dino_run/game/enemy_manager.dart';
 import 'package:dino_run/widgets/game_over_menu.dart';
@@ -21,6 +22,8 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   int score;
   EnemyManager _enemyManager;
   double _elapsedTime = 0.0;
+  bool _isGameOver = false;
+  bool _isGamePaused = false;
 
   DinoGame() {
     _parallaxComponent = ParallaxComponent(
@@ -69,6 +72,9 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
         life: _dino.life,
       ),
     );
+    AudioManager.instance.startBgm(
+      '8Bit Platformer Loop.wav',
+    );
   }
 
   @override
@@ -82,7 +88,9 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   @override
   void onTapDown(TapDownDetails details) {
     super.onTapDown(details);
-    _dino.jump();
+    if(!_isGameOver && !_isGamePaused) {
+      _dino.jump();
+    }
   }
 
   @override
@@ -123,23 +131,30 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
 
   void pauseGame() {
     pauseEngine();
-    addWidgetOverlay(
-      'PauseMenu', 
-      PauseMenu(
-        onResumePressed: resumeGame,
-      ),
-    );
+    if(!_isGameOver) {
+      _isGamePaused = true;
+      addWidgetOverlay(
+        'PauseMenu', 
+        PauseMenu(
+          onResumePressed: resumeGame,
+        ),
+      );
+    }
+    AudioManager.instance.pauseBgm();
   }
 
   void resumeGame() {
     removeWidgetOverlay(
       'PauseMenu',
     );
+    _isGamePaused = false;
     resumeEngine();
+    AudioManager.instance.resumeBgm();
   }
 
   void gameOver() {
     pauseEngine();
+    _isGameOver = true;
     addWidgetOverlay(
       'GameOverMenu', 
       GameOverMenu(
@@ -147,6 +162,7 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
         onRestartPressed: reset,
       ),
     );
+    AudioManager.instance.pauseBgm();
   }
 
   void reset() {
@@ -160,6 +176,14 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     removeWidgetOverlay(
       'GameOverMenu',
     );
+    _isGameOver = false;
     resumeEngine();
+    AudioManager.instance.resumeBgm();
+  }
+
+  @override
+  void onDetach() {
+    AudioManager.instance.stopBgm();
+    super.onDetach();
   }
 }

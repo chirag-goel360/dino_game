@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class GameOverMenu extends StatelessWidget {
   final int score;
   final Function onRestartPressed;
-  const GameOverMenu({Key key, @required this.score, @required this.onRestartPressed}) : assert(score!=null), assert(onRestartPressed!=null),super(key: key);
+  const GameOverMenu({Key key, @required this.score, @required this.onRestartPressed}) : assert(score!=null), assert(onRestartPressed!=null), super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,9 @@ class GameOverMenu extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(right: 2),
+                    padding: EdgeInsets.only(
+                      right: 2,
+                    ),
                     child: RaisedButton(
                       child: Text(
                         'Retry',
@@ -56,7 +58,9 @@ class GameOverMenu extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 2),
+                    padding: EdgeInsets.only(
+                      left: 2,
+                    ),
                     child: RaisedButton(
                       child: Text(
                         'Main Menu',

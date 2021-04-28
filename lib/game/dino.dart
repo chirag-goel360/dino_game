@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dino_run/game/audio_manager.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/spritesheet.dart';
@@ -44,7 +45,8 @@ class Dino extends AnimationComponent {
     );
     this.animation = _runAnimation;
     _timer = Timer(
-      1, callback: () {
+      1,
+      callback: () {
         run();
       },
     );
@@ -91,6 +93,9 @@ class Dino extends AnimationComponent {
       _isHit = true;
       this.animation = _hitAnimation;
       life.value -= 1;
+      AudioManager.instance.playSfx(
+        'hurt7.wav',
+      );
       _timer.start();
     }
   }
@@ -98,6 +103,9 @@ class Dino extends AnimationComponent {
   void jump() {
     if(isOnGround()) {
       this.speedY = -500;
+      AudioManager.instance.playSfx(
+        'jump14.wav',
+      );
     }
   }
 }

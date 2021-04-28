@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PauseMenu extends StatelessWidget {
   final Function onResumePressed;
-  const PauseMenu({Key key, @required this.onResumePressed}) : assert(onResumePressed !=null),super(key: key);
+  const PauseMenu({Key key, @required this.onResumePressed}) : assert(onResumePressed !=null), super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,14 @@ class PauseMenu extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  icon: Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    onResumePressed.call();
-                  }
+                icon: Icon(
+                  Icons.play_arrow,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  onResumePressed.call();
+                }
               ),
             ],
           ),
