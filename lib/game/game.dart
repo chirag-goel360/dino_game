@@ -20,6 +20,7 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   TextComponent _scoreText;
   int score;
   EnemyManager _enemyManager;
+  double _elapsedTime = 0.0;
 
   DinoGame() {
     _parallaxComponent = ParallaxComponent(
@@ -87,8 +88,12 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   @override
   void update(double t) {
     super.update(t);
-    score += (60 * t).toInt();
-    _scoreText.text = score.toString();
+    _elapsedTime += t;
+    if(_elapsedTime > (1/60)) {
+      _elapsedTime = 0.0;
+      score += 1;
+      _scoreText.text = score.toString();
+    }
     components.whereType<Enemy>().forEach((enemy) {
       if(_dino.distance(enemy) < 30) {
         _dino.hit();

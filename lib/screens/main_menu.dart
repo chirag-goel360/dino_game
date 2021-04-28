@@ -1,8 +1,22 @@
-import 'package:dino_run/screens/game_play.dart';
+import 'package:dino_run/widgets/menu.dart';
+import 'package:dino_run/widgets/settings.dart';
 import 'package:flutter/material.dart';
 
-class MainMenu extends StatelessWidget {
+class MainMenu extends StatefulWidget {
   const MainMenu({Key key}) : super(key: key);
+
+  @override
+  _MainMenuState createState() => _MainMenuState();
+}
+
+class _MainMenuState extends State<MainMenu> {
+  ValueNotifier<CrossFadeState> _crossFadeStateNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    _crossFadeStateNotifier = ValueNotifier(CrossFadeState.showFirst);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,38 +43,35 @@ class MainMenu extends StatelessWidget {
                 horizontal: 100,
                 vertical: 50,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Dino Run',
-                    style: TextStyle(
-                      fontSize: 60,
-                      color: Colors.white,
-                    ),
+              child: ValueListenableBuilder(
+                valueListenable: _crossFadeStateNotifier,
+                builder: (BuildContext context, CrossFadeState value, Widget child) {
+                  return AnimatedCrossFade(
+                  firstChild: Menu(
+                    onSettingsPressed: showSettings,
+                  ), 
+                  secondChild: Settings(
+                    onBackPressed: showMenu,
+                  ), 
+                  crossFadeState: value, 
+                  duration: Duration(
+                    milliseconds: 300,
                   ),
-                  RaisedButton(
-                    child: Text(
-                      'Play',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => GamePlay(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void showMenu() {
+    _crossFadeStateNotifier.value = CrossFadeState.showFirst;
+  }
+
+  void showSettings() {
+    _crossFadeStateNotifier.value = CrossFadeState.showSecond;
   }
 }
