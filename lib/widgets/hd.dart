@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class HD extends StatelessWidget {
   final Function onPausePressed;
   final ValueNotifier<int> life;
-  const HD({Key key, @required this.onPausePressed, @required this.life}) : assert(onPausePressed!=null), assert(life!=null), super(key: key);
+  const HD({Key key, @required this.onPausePressed, @required this.life})
+      : assert(onPausePressed != null),
+        assert(life != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,10 @@ class HD extends StatelessWidget {
           valueListenable: life,
           builder: (BuildContext context, value, Widget child) {
             final list = List<Widget>();
-            for(int i=0; i<5; i++) {
+            for (int i = 0; i < 5; i++) {
               list.add(
                 Icon(
-                  (i<value) ? Icons.favorite : Icons.favorite_border,
+                  (i < value) ? Icons.favorite : Icons.favorite_border,
                   color: Colors.red,
                 ),
               );

@@ -15,7 +15,7 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
     _random = Random();
     _spawnLevel = 0;
     _timer = Timer(
-      4, 
+      4,
       repeat: true,
       callback: () {
         spawnRandomEnemy();
@@ -39,21 +39,19 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
   }
 
   @override
-  void render(Canvas c) {
-
-  }
+  void render(Canvas c) {}
 
   @override
   void update(double t) {
     _timer.update(t);
     var newSpawnLevel = gameRef.score ~/ 500;
-    if(_spawnLevel < newSpawnLevel) {
+    if (_spawnLevel < newSpawnLevel) {
       _spawnLevel = newSpawnLevel;
       var newWaitTime = (4 / (1 + (0.1 * _spawnLevel)));
       debugPrint(newWaitTime.toString());
       _timer.stop();
       _timer = Timer(
-        newWaitTime, 
+        newWaitTime,
         repeat: true,
         callback: () {
           spawnRandomEnemy();

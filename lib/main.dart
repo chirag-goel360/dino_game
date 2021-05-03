@@ -11,7 +11,8 @@ Future<void> main() async {
   await Flame.util.setLandscape();
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
-  await AudioManager.instance.init(['8Bit Platformer Loop.wav','hurt7.wav','jump14.wav']);
+  await AudioManager.instance
+      .init(['8Bit Platformer Loop.wav', 'hurt7.wav', 'jump14.wav']);
   runApp(
     MyApp(),
   );

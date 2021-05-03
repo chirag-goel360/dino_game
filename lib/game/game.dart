@@ -48,8 +48,8 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
           fill: LayerFill.none,
         ),
       ],
-      baseSpeed: Offset(100,0),
-      layerDelta: Offset(20,0),
+      baseSpeed: Offset(100, 0),
+      layerDelta: Offset(20, 0),
     );
     add(_parallaxComponent);
     _dino = Dino();
@@ -68,7 +68,7 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     addWidgetOverlay(
       'hd',
       HD(
-        onPausePressed: pauseGame, 
+        onPausePressed: pauseGame,
         life: _dino.life,
       ),
     );
@@ -88,7 +88,7 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   @override
   void onTapDown(TapDownDetails details) {
     super.onTapDown(details);
-    if(!_isGameOver && !_isGamePaused) {
+    if (!_isGameOver && !_isGamePaused) {
       _dino.jump();
     }
   }
@@ -97,24 +97,24 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
   void update(double t) {
     super.update(t);
     _elapsedTime += t;
-    if(_elapsedTime > (1/60)) {
+    if (_elapsedTime > (1 / 60)) {
       _elapsedTime = 0.0;
       score += 1;
       _scoreText.text = score.toString();
     }
     components.whereType<Enemy>().forEach((enemy) {
-      if(_dino.distance(enemy) < 30) {
+      if (_dino.distance(enemy) < 30) {
         _dino.hit();
       }
     });
-    if(_dino.life.value <= 0) {
+    if (_dino.life.value <= 0) {
       gameOver();
     }
   }
 
   @override
   void lifecycleStateChange(AppLifecycleState state) {
-    switch(state) {
+    switch (state) {
       case AppLifecycleState.resumed:
         break;
       case AppLifecycleState.inactive:
@@ -131,10 +131,10 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
 
   void pauseGame() {
     pauseEngine();
-    if(!_isGameOver) {
+    if (!_isGameOver) {
       _isGamePaused = true;
       addWidgetOverlay(
-        'PauseMenu', 
+        'PauseMenu',
         PauseMenu(
           onResumePressed: resumeGame,
         ),
@@ -156,9 +156,9 @@ class DinoGame extends BaseGame with TapDetector, HasWidgetsOverlay {
     pauseEngine();
     _isGameOver = true;
     addWidgetOverlay(
-      'GameOverMenu', 
+      'GameOverMenu',
       GameOverMenu(
-        score: score, 
+        score: score,
         onRestartPressed: reset,
       ),
     );

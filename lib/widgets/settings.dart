@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
   final Function onBackPressed;
-  const Settings({Key key, @required this.onBackPressed}) : assert(onBackPressed!=null), super(key: key);
+  const Settings({Key key, @required this.onBackPressed})
+      : assert(onBackPressed != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,39 +24,39 @@ class Settings extends StatelessWidget {
           ),
           ValueListenableBuilder(
             valueListenable: AudioManager.instance.listenablesfx,
-            builder: (BuildContext context,bool value,Widget child) {
+            builder: (BuildContext context, bool value, Widget child) {
               return SwitchListTile(
-              title: Text(
-                'SFX',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+                title: Text(
+                  'SFX',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
                 ),
-              ),
-              value: value,
-              onChanged: (bool value) {
-                AudioManager.instance.setSfx(value);
-              },
-            );
-            }, 
+                value: value,
+                onChanged: (bool value) {
+                  AudioManager.instance.setSfx(value);
+                },
+              );
+            },
           ),
           ValueListenableBuilder(
             valueListenable: AudioManager.instance.listenablebgm,
-            builder: (BuildContext context,bool value,Widget child) {
+            builder: (BuildContext context, bool value, Widget child) {
               return SwitchListTile(
-              title: Text(
-                'BGM',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+                title: Text(
+                  'BGM',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
                 ),
-              ),
-              value: value,
-              onChanged: (bool value) {
-                AudioManager.instance.setBgm(value);
-              },
-            );
-            }, 
+                value: value,
+                onChanged: (bool value) {
+                  AudioManager.instance.setBgm(value);
+                },
+              );
+            },
           ),
           IconButton(
             icon: Icon(

@@ -9,18 +9,17 @@ class AudioManager {
   Future<void> init(List<String> files) async {
     Flame.bgm.initialize();
     await Flame.audio.loadAll(files);
-    _pref = await Hive.openBox(
-      'preferences',
-    );
-    if(_pref.get('bgm')==null) {
+    _pref = await Hive.openBox('preferences');
+    if (_pref.get('bgm') == null) {
       _pref.put('bgm', true);
     }
-    if(_pref.get('sfx')==null) {
+    if (_pref.get('sfx') == null) {
       _pref.put('sfx', true);
     }
     _sfx = ValueNotifier(_pref.get('sfx'));
     _bgm = ValueNotifier(_pref.get('bgm'));
   }
+
   Box _pref;
   ValueNotifier<bool> _sfx;
   ValueNotifier<bool> _bgm;
@@ -38,34 +37,34 @@ class AudioManager {
   }
 
   void startBgm(String fileName) {
-    if(_bgm.value) {
+    if (_bgm.value) {
       Flame.bgm.play(
-        fileName, 
+        fileName,
         volume: 0.4,
       );
     }
   }
 
   void pauseBgm() {
-    if(_bgm.value) {
+    if (_bgm.value) {
       Flame.bgm.pause();
     }
   }
 
   void resumeBgm() {
-    if(_bgm.value) {
+    if (_bgm.value) {
       Flame.bgm.resume();
     }
   }
 
   void stopBgm() {
-    if(_bgm.value) {
+    if (_bgm.value) {
       Flame.bgm.stop();
     }
   }
 
   void playSfx(String fileName) {
-    if(_sfx.value) {
+    if (_sfx.value) {
       Flame.audio.play(
         fileName,
       );

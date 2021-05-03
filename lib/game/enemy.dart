@@ -54,7 +54,7 @@ class Enemy extends AnimationComponent {
   static Random _random = Random();
 
   static const Map<EnemyType, EnemyData> _enemyDetails = {
-    EnemyType.AngryPig : EnemyData(
+    EnemyType.AngryPig: EnemyData(
       imageName: 'AngryPig/Walk (36x30).png',
       textureWidth: 36,
       textureHeight: 30,
@@ -63,7 +63,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 250,
     ),
-    EnemyType.Bat : EnemyData(
+    EnemyType.Bat: EnemyData(
       imageName: 'Bat/Flying (46x30).png',
       textureWidth: 46,
       textureHeight: 30,
@@ -72,7 +72,7 @@ class Enemy extends AnimationComponent {
       canFly: true,
       speed: 300,
     ),
-    EnemyType.Bee : EnemyData(
+    EnemyType.Bee: EnemyData(
       imageName: 'Bee/Idle (36x34).png',
       textureWidth: 36,
       textureHeight: 34,
@@ -81,7 +81,7 @@ class Enemy extends AnimationComponent {
       canFly: true,
       speed: 300,
     ),
-    EnemyType.BlueBird : EnemyData(
+    EnemyType.BlueBird: EnemyData(
       imageName: 'BlueBird/Flying (32x32).png',
       textureWidth: 32,
       textureHeight: 32,
@@ -90,7 +90,7 @@ class Enemy extends AnimationComponent {
       canFly: true,
       speed: 350,
     ),
-    EnemyType.Bunny : EnemyData(
+    EnemyType.Bunny: EnemyData(
       imageName: 'Bunny/Run (34x44).png',
       textureWidth: 34,
       textureHeight: 44,
@@ -99,7 +99,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 250,
     ),
-    EnemyType.Chameleon : EnemyData(
+    EnemyType.Chameleon: EnemyData(
       imageName: 'Chameleon/Run (84x38).png',
       textureWidth: 84,
       textureHeight: 38,
@@ -108,7 +108,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 300,
     ),
-    EnemyType.Chicken : EnemyData(
+    EnemyType.Chicken: EnemyData(
       imageName: 'Chicken/Run (32x34).png',
       textureWidth: 32,
       textureHeight: 34,
@@ -117,7 +117,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 350,
     ),
-    EnemyType.Duck : EnemyData(
+    EnemyType.Duck: EnemyData(
       imageName: 'Duck/Idle (36x36).png',
       textureWidth: 36,
       textureHeight: 36,
@@ -126,7 +126,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 250,
     ),
-    EnemyType.FatBird : EnemyData(
+    EnemyType.FatBird: EnemyData(
       imageName: 'FatBird/Idle (40x48).png',
       textureWidth: 40,
       textureHeight: 48,
@@ -135,7 +135,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 250,
     ),
-    EnemyType.Ghost : EnemyData(
+    EnemyType.Ghost: EnemyData(
       imageName: 'Ghost/Idle (44x30).png',
       textureWidth: 44,
       textureHeight: 30,
@@ -144,7 +144,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 350,
     ),
-    EnemyType.Mushroom : EnemyData(
+    EnemyType.Mushroom: EnemyData(
       imageName: 'Mushroom/Idle (32x32).png',
       textureWidth: 32,
       textureHeight: 32,
@@ -153,7 +153,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 300,
     ),
-    EnemyType.Plant : EnemyData(
+    EnemyType.Plant: EnemyData(
       imageName: 'Plant/Idle (44x42).png',
       textureWidth: 44,
       textureHeight: 42,
@@ -162,7 +162,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 300,
     ),
-    EnemyType.Radish : EnemyData(
+    EnemyType.Radish: EnemyData(
       imageName: 'Radish/Run (30x38).png',
       textureWidth: 30,
       textureHeight: 38,
@@ -171,7 +171,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 350,
     ),
-    EnemyType.Rino : EnemyData(
+    EnemyType.Rino: EnemyData(
       imageName: 'Rino/Idle (52x34).png',
       textureWidth: 52,
       textureHeight: 34,
@@ -180,7 +180,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 300,
     ),
-    EnemyType.Rocks : EnemyData(
+    EnemyType.Rocks: EnemyData(
       imageName: 'Rocks/Rock1_Run (38x34).png',
       textureWidth: 38,
       textureHeight: 34,
@@ -189,7 +189,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 200,
     ),
-    EnemyType.Skull : EnemyData(
+    EnemyType.Skull: EnemyData(
       imageName: 'Skull/Idle 2 (52x54).png',
       textureWidth: 52,
       textureHeight: 54,
@@ -198,7 +198,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 300,
     ),
-    EnemyType.Slime : EnemyData(
+    EnemyType.Slime: EnemyData(
       imageName: 'Slime/Idle-Run (44x30).png',
       textureWidth: 44,
       textureHeight: 30,
@@ -207,7 +207,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 200,
     ),
-    EnemyType.Snail : EnemyData(
+    EnemyType.Snail: EnemyData(
       imageName: 'Snail/Walk (38x24).png',
       textureWidth: 38,
       textureHeight: 24,
@@ -216,7 +216,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 200,
     ),
-    EnemyType.Trunk : EnemyData(
+    EnemyType.Trunk: EnemyData(
       imageName: 'Trunk/Attack (64x32).png',
       textureWidth: 64,
       textureHeight: 32,
@@ -225,7 +225,7 @@ class Enemy extends AnimationComponent {
       canFly: false,
       speed: 250,
     ),
-    EnemyType.Turtle : EnemyData(
+    EnemyType.Turtle: EnemyData(
       imageName: 'Turtle/Idle 1 (44x26).png',
       textureWidth: 44,
       textureHeight: 26,
@@ -248,7 +248,7 @@ class Enemy extends AnimationComponent {
     this.animation = spriteSheet.createAnimation(
       0,
       from: 0,
-      to: _myData.nColumns-1,
+      to: _myData.nColumns - 1,
       stepTime: 0.1,
     );
     this.anchor = Anchor.center;
@@ -258,12 +258,13 @@ class Enemy extends AnimationComponent {
   void resize(Size size) {
     super.resize(size);
     debugPrint(size.toString());
-    double scaleFactor = (size.width / numberOfTilesAlongWidth) / _myData.textureWidth;
+    double scaleFactor =
+        (size.width / numberOfTilesAlongWidth) / _myData.textureWidth;
     this.height = _myData.textureHeight * scaleFactor;
     this.width = _myData.textureWidth * scaleFactor;
     this.x = size.width + this.width;
     this.y = size.height - groundHeight - (this.height / 2);
-    if(_myData.canFly && _random.nextBool()) {
+    if (_myData.canFly && _random.nextBool()) {
       this.y -= this.height;
     }
   }

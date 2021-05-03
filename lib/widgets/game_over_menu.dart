@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 class GameOverMenu extends StatelessWidget {
   final int score;
   final Function onRestartPressed;
-  const GameOverMenu({Key key, @required this.score, @required this.onRestartPressed}) : assert(score!=null), assert(onRestartPressed!=null), super(key: key);
+  const GameOverMenu(
+      {Key key, @required this.score, @required this.onRestartPressed})
+      : assert(score != null),
+        assert(onRestartPressed != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

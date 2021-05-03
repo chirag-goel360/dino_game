@@ -45,18 +45,19 @@ class _MainMenuState extends State<MainMenu> {
               ),
               child: ValueListenableBuilder(
                 valueListenable: _crossFadeStateNotifier,
-                builder: (BuildContext context, CrossFadeState value, Widget child) {
+                builder:
+                    (BuildContext context, CrossFadeState value, Widget child) {
                   return AnimatedCrossFade(
-                  firstChild: Menu(
-                    onSettingsPressed: showSettings,
-                  ), 
-                  secondChild: Settings(
-                    onBackPressed: showMenu,
-                  ), 
-                  crossFadeState: value, 
-                  duration: Duration(
-                    milliseconds: 300,
-                  ),
+                    firstChild: Menu(
+                      onSettingsPressed: showSettings,
+                    ),
+                    secondChild: Settings(
+                      onBackPressed: showMenu,
+                    ),
+                    crossFadeState: value,
+                    duration: Duration(
+                      milliseconds: 300,
+                    ),
                   );
                 },
               ),

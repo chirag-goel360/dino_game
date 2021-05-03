@@ -61,7 +61,8 @@ class Dino extends AnimationComponent {
     debugPrint(size.toString());
     this.height = this.width = size.width / numberOfTilesAlongWidth;
     this.x = this.width;
-    this.y = size.height - groundHeight - (this.height / 2) + dinoTopBottomSpacing;
+    this.y =
+        size.height - groundHeight - (this.height / 2) + dinoTopBottomSpacing;
     this.yMax = this.y;
   }
 
@@ -72,7 +73,7 @@ class Dino extends AnimationComponent {
     this.speedY += GRAVITY * t;
     // d = s + v * t
     this.y += this.speedY * t;
-    if(isOnGround()) {
+    if (isOnGround()) {
       this.y = this.yMax;
       this.speedY = 0.0;
     }
@@ -89,7 +90,7 @@ class Dino extends AnimationComponent {
   }
 
   void hit() {
-    if(!_isHit) {
+    if (!_isHit) {
       _isHit = true;
       this.animation = _hitAnimation;
       life.value -= 1;
@@ -101,7 +102,7 @@ class Dino extends AnimationComponent {
   }
 
   void jump() {
-    if(isOnGround()) {
+    if (isOnGround()) {
       this.speedY = -500;
       AudioManager.instance.playSfx(
         'jump14.wav',
