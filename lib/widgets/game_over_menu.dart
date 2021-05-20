@@ -49,7 +49,7 @@ class GameOverMenu extends StatelessWidget {
                     padding: EdgeInsets.only(
                       right: 2,
                     ),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       child: Text(
                         'Retry',
                         style: TextStyle(
@@ -65,7 +65,7 @@ class GameOverMenu extends StatelessWidget {
                     padding: EdgeInsets.only(
                       left: 2,
                     ),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       child: Text(
                         'Main Menu',
                         style: TextStyle(

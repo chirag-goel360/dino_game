@@ -18,7 +18,7 @@ class Settings extends StatelessWidget {
           Text(
             'Settings',
             style: TextStyle(
-              fontSize: 60,
+              fontSize: 50,
               color: Colors.white,
             ),
           ),

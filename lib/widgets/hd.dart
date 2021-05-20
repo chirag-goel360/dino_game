@@ -26,7 +26,7 @@ class HD extends StatelessWidget {
         ValueListenableBuilder(
           valueListenable: life,
           builder: (BuildContext context, value, Widget child) {
-            final list = List<Widget>();
+            final List<Widget> list = [];
             for (int i = 0; i < 5; i++) {
               list.add(
                 Icon(

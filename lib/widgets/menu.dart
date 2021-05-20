@@ -20,7 +20,7 @@ class Menu extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        RaisedButton(
+        ElevatedButton(
           child: Text(
             'Play',
             style: TextStyle(
@@ -35,7 +35,7 @@ class Menu extends StatelessWidget {
             );
           },
         ),
-        RaisedButton(
+        ElevatedButton(
           child: Text(
             'Settings',
             style: TextStyle(
